@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: craftconnect-api
+    runtime: node
+    rootDir: api
+    buildCommand: npm install && npm run prisma:generate && npm run build
+    startCommand: npx prisma migrate deploy && npm run prisma:seed && npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: PORT
+        value: 4000
+      - key: SESSION_COOKIE_NAME
+        value: cc_session
+      - key: SESSION_COOKIE_SECURE
+        value: true
+      - key: SESSION_COOKIE_SAME_SITE
+        value: none
+      - key: TRUST_PROXY
+        value: true
+      - key: DATABASE_URL
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false

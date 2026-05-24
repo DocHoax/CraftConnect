@@ -109,37 +109,26 @@ Health endpoint:
 
 ## Deployment
 
-The repository now includes a root-level Docker Compose deployment in `../docker-compose.yml`.
+The recommended hosted deployment for this backend is:
 
-The compose stack runs:
+- API on Render
+- PostgreSQL on Neon
 
-- PostgreSQL
-- the API service
-- the frontend service
+The repository includes [c:/Users/Syntra/Downloads/CraftConnect/render.yaml](c:/Users/Syntra/Downloads/CraftConnect/render.yaml) to support that setup.
 
-Deployment flow:
+Required production environment variables:
 
-1. PostgreSQL starts inside the compose network.
-2. The API waits for the database health check.
-3. The API runs `prisma migrate deploy` and `npm run prisma:seed` on startup.
-4. The frontend is served by Nginx and talks to the API on `http://localhost:4000`.
-
-From the repository root:
-
-```bash
-docker compose up --build
+```env
+PORT=4000
+DATABASE_URL=<your-neon-direct-connection-string>
+CORS_ORIGIN=https://your-vercel-domain.vercel.app
+SESSION_COOKIE_NAME=cc_session
+SESSION_COOKIE_SECURE=true
+SESSION_COOKIE_SAME_SITE=none
+TRUST_PROXY=true
 ```
 
-Exposed services:
-
-- frontend: `http://localhost:8080`
-- API: `http://localhost:4000`
-
-Notes:
-
-- the compose PostgreSQL service is internal-only and is not published to a host port
-- this avoids conflicts with any PostgreSQL instance already running on your machine
-- if you deploy to a real HTTPS host, review cookie security settings and `CORS_ORIGIN`
+For the full deployment sequence, see [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md).
 
 ## Frontend Integration
 
@@ -158,3 +147,4 @@ VITE_API_BASE_URL="http://localhost:4000"
 ## Related Docs
 
 - Frontend application README: `../app/README.md`
+- Hosted deployment guide: [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md)

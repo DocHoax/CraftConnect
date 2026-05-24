@@ -72,21 +72,21 @@ Frontend development server:
 
 ## Deployment
 
-This frontend can be deployed together with the backend using the root-level Docker Compose setup in `../docker-compose.yml`.
+The recommended hosted deployment for this project is:
 
-When deployed through Docker Compose:
+- frontend on Vercel
+- backend on Render
+- database on Neon Postgres
 
-- the frontend is served by Nginx
-- the frontend is exposed on `http://localhost:8080`
-- the build uses `VITE_API_BASE_URL=http://localhost:4000`
+For the full step-by-step process, see [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md).
 
-From the repository root:
+Frontend-specific Vercel settings:
 
-```bash
-docker compose up --build
-```
+- Framework Preset: `Vite`
+- Root Directory: `app`
+- Environment Variable: `VITE_API_BASE_URL=https://your-render-service.onrender.com`
 
-See `../api/README.md` for the backend side of the deployment flow.
+This app already includes [c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json](c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json) for SPA route rewrites.
 
 ## Current Behavior
 
@@ -97,3 +97,4 @@ See `../api/README.md` for the backend side of the deployment flow.
 ## Related Docs
 
 - Backend setup and API details: `../api/README.md`
+- Hosted deployment guide: [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md)

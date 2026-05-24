@@ -13,6 +13,10 @@ const app = express()
 const port = Number(process.env.PORT || 4000)
 const corsOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173').split(',').map((v) => v.trim())
 
+if (process.env.TRUST_PROXY === 'true') {
+  app.set('trust proxy', 1)
+}
+
 app.use(cors({ origin: corsOrigins, credentials: true }))
 app.use(express.json())
 app.use(cookieParser())
