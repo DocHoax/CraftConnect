@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Link } from 'react-router-dom'
@@ -11,7 +11,68 @@ import {
 import { Button } from '@/components/ui/button'
 import Navigation from '@/components/Navigation'
 import type { User } from '@/App'
-import { artisans, categories, testimonials, faqs, howItWorks, pricingTiers } from '@/data/mockData'
+import { useArtisanCategories, useArtisanSearch } from '@/features/artisans/hooks'
+
+const howItWorks = [
+  {
+    step: 1,
+    title: 'Tell us what you need',
+    description: 'A repair, install, or project, described in seconds.',
+    image: '/images/step-search.jpg',
+  },
+  {
+    step: 2,
+    title: 'Choose a time',
+    description: 'Pick a slot that fits your calendar.',
+    image: '/images/step-schedule.jpg',
+  },
+  {
+    step: 3,
+    title: 'We will handle the rest',
+    description: 'Your artisan arrives with the details already confirmed.',
+    image: '/images/step-done.jpg',
+  },
+]
+
+const pricingTiers = [
+  {
+    name: 'Small Fixes',
+    price: 'From $45',
+    description: 'Typical entry point for quick repairs and callouts.',
+    examples: ['Leaky faucet', 'Light fixture install', 'Door lock repair'],
+  },
+  {
+    name: 'Standard Jobs',
+    price: 'From $120',
+    description: 'Common installs, upgrades, and room-scale work.',
+    examples: ['Paint a room', 'Install ceiling fan', 'Repair drywall'],
+  },
+  {
+    name: 'Projects',
+    price: 'Custom Quote',
+    description: 'Larger jobs that need an on-site estimate.',
+    examples: ['Kitchen remodel', 'Deck construction', 'Full renovation'],
+  },
+]
+
+const faqs = [
+  {
+    question: 'How do I book an artisan?',
+    answer: 'Search for a service, compare verified artisans, pick a time slot, and confirm the booking from the app.',
+  },
+  {
+    question: 'Can I reschedule or cancel a booking?',
+    answer: 'Yes. Customers can manage eligible bookings from the dashboard before the appointment window.',
+  },
+  {
+    question: 'How is pricing calculated?',
+    answer: 'Artisans define their rates and the booking flow shows the current price before checkout.',
+  },
+  {
+    question: 'Are artisans verified?',
+    answer: 'Profiles marked verified have been reviewed on the platform before appearing as trusted providers.',
+  },
+]
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,6 +82,8 @@ interface LandingPageProps {
 }
 
 export default function LandingPage({ user, logout }: LandingPageProps) {
+  const { data: categories } = useArtisanCategories()
+  const { data: artisans, isLoading: artisansLoading } = useArtisanSearch({})
   const heroRef = useRef<HTMLDivElement>(null)
   const howItWorksRef = useRef<HTMLDivElement>(null)
   const categoriesRef = useRef<HTMLDivElement>(null)
@@ -30,6 +93,19 @@ export default function LandingPage({ user, logout }: LandingPageProps) {
   const testimonialsRef = useRef<HTMLDivElement>(null)
   const recruitRef = useRef<HTMLDivElement>(null)
   const faqRef = useRef<HTMLDivElement>(null)
+  const featuredArtisans = useMemo(() => artisans.slice(0, 6), [artisans])
+  const liveStats = useMemo(() => {
+    const verifiedCount = artisans.filter((artisan) => artisan.verified).length
+    const averageRating = artisans.length > 0
+      ? (artisans.reduce((total, artisan) => total + artisan.rating, 0) / artisans.length).toFixed(1)
+      : '0.0'
+
+    return [
+      { label: 'Live artisan profiles', value: String(artisans.length) },
+      { label: 'Verified pros', value: String(verifiedCount) },
+      { label: 'Average rating', value: averageRating },
+    ]
+  }, [artisans])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -354,7 +430,7 @@ export default function LandingPage({ user, logout }: LandingPageProps) {
           </div>
 
           <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
-            {artisans.map((artisan) => (
+            {featuredArtisans.map((artisan) => (
               <Link 
                 key={artisan.id} 
                 to={`/artisan/${artisan.id}`}
@@ -388,6 +464,12 @@ export default function LandingPage({ user, logout }: LandingPageProps) {
               </Link>
             ))}
           </div>
+
+          {!artisansLoading && featuredArtisans.length === 0 && (
+            <div className="mt-6 rounded-2xl bg-white p-6 text-center text-sm text-[#6E5F57] shadow-[0_18px_40px_rgba(43,30,26,0.08)]">
+              No artisan profiles are available yet.
+            </div>
+          )}
         </div>
       </section>
 
@@ -476,33 +558,20 @@ export default function LandingPage({ user, logout }: LandingPageProps) {
         </div>
       </section>
 
-      {/* Section 7: Testimonials */}
+      {/* Section 7: Live Snapshot */}
       <section ref={testimonialsRef} className="py-12 sm:py-16 lg:py-28">
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2B1E1A]" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              Real stories
+              Live marketplace snapshot
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial-card bg-white rounded-2xl sm:rounded-[28px] p-4 sm:p-6 lg:p-8 shadow-[0_18px_40px_rgba(43,30,26,0.08)]">
-                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-full overflow-hidden bg-[#E9E1D6] flex-shrink-0">
-                    <img src={testimonial.image} alt={testimonial.customerName} className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-[#2B1E1A] text-sm sm:text-base">{testimonial.customerName}</h4>
-                    <div className="flex items-center gap-0.5 sm:gap-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-[#E4A14F] text-[#E4A14F]" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-[#6E5F57] text-sm sm:text-base lg:text-lg leading-relaxed">"{testimonial.comment}"</p>
-                <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-[#6E5F57]">Service: {testimonial.service}</p>
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
+            {liveStats.map((stat) => (
+              <div key={stat.label} className="testimonial-card bg-white rounded-2xl sm:rounded-[28px] p-4 sm:p-6 lg:p-8 shadow-[0_18px_40px_rgba(43,30,26,0.08)] text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-[#E4A14F]">{stat.value}</p>
+                <p className="mt-2 text-sm sm:text-base text-[#6E5F57]">{stat.label}</p>
               </div>
             ))}
           </div>

@@ -150,10 +150,6 @@ export default function Login() {
               </Link>
             </p>
           </div>
-
-          <p className="mt-4 text-center text-xs text-[#6E5F57]">
-            Auth mode: {import.meta.env.VITE_AUTH_MODE === 'api' ? 'backend API' : 'demo'}
-          </p>
         </div>
       </div>
     </div>

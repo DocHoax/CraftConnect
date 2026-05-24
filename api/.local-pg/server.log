@@ -32,4 +32,17 @@
 2026-05-24 13:07:37.717 WAT [14400] LOG:  background worker "logical replication launcher" (PID 12304) was terminated by exception 0xC000013A
 2026-05-24 13:07:37.717 WAT [14400] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
 2026-05-24 13:07:37.717 WAT [14400] LOG:  terminating any other active server processes
-^C
+^C2026-05-24 14:41:39.364 WAT [7292] LOG:  starting PostgreSQL 18.3 on x86_64-windows, compiled by msvc-19.44.35223, 64-bit
+2026-05-24 14:41:39.397 WAT [7292] LOG:  listening on IPv6 address "::1", port 5433
+2026-05-24 14:41:39.397 WAT [7292] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-05-24 14:41:40.283 WAT [5852] LOG:  database system was interrupted; last known up at 2026-05-24 12:30:14 WAT
+2026-05-24 14:41:48.776 WAT [5852] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-05-24 14:41:48.846 WAT [5852] LOG:  redo starts at 0/263BD18
+2026-05-24 14:41:48.846 WAT [5852] LOG:  invalid record length at 0/263BD50: expected at least 24, got 0
+2026-05-24 14:41:48.855 WAT [5852] LOG:  redo done at 0/263BD18 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.02 s
+2026-05-24 14:41:49.004 WAT [14972] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-05-24 14:41:49.438 WAT [14972] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.011 s, sync=0.062 s, total=0.552 s; sync files=2, longest=0.045 s, average=0.031 s; distance=0 kB, estimate=0 kB; lsn=0/263BD50, redo lsn=0/263BD50
+2026-05-24 14:41:49.623 WAT [7292] LOG:  database system is ready to accept connections
+2026-05-24 15:25:26.688 WAT [7292] LOG:  background worker "logical replication launcher" (PID 11612) was terminated by exception 0xC000013A
+2026-05-24 15:25:26.688 WAT [7292] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2026-05-24 15:25:26.775 WAT [7292] LOG:  terminating any other active server processes

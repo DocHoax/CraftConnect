@@ -21,7 +21,7 @@ npm install
 npm run prisma:generate
 ```
 
-## 3. Create tables and seed data
+## 3. Create tables and reference data
 
 ```bash
 npm run prisma:migrate -- --name init
@@ -34,18 +34,10 @@ npm run prisma:seed
 npm run dev
 ```
 
-## Demo users after seed
-
-- `customer@example.com` / `password123`
-- `maria@example.com` / `password123`
-- `admin@example.com` / `password123`
-
 ## Frontend env
 
 Set these in `app/.env`:
 
 ```
 VITE_API_BASE_URL="http://localhost:4000"
-VITE_AUTH_MODE="api"
-VITE_DATA_MODE="api"
 ```

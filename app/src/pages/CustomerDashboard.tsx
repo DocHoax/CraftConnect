@@ -10,7 +10,6 @@ import Navigation from '@/components/Navigation'
 import type { User as UserType } from '@/App'
 import { useCustomerBookings } from '@/features/bookings/hooks'
 import { updateBookingStatus } from '@/features/bookings/bookings-api'
-import { artisans } from '@/data/mockData'
 
 interface CustomerDashboardProps {
   user: UserType | null
@@ -39,8 +38,8 @@ export default function CustomerDashboard({ user, logout }: CustomerDashboardPro
     [customerBookings],
   )
 
-  const getBookingImage = (artisanId: string) => {
-    return artisans.find((artisan) => artisan.id === artisanId)?.image ?? '/images/artisan-1.jpg'
+  const getBookingImage = (image?: string) => {
+    return image ?? '/images/artisan-1.jpg'
   }
 
   const handleCancelBooking = async (bookingId: string) => {
@@ -222,7 +221,7 @@ export default function CustomerDashboard({ user, logout }: CustomerDashboardPro
                       <div key={booking.id} className="bg-white rounded-xl sm:rounded-[28px] p-4 sm:p-6 shadow-[0_18px_40px_rgba(43,30,26,0.08)]">
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                           <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden bg-[#E9E1D6] flex-shrink-0">
-                            <img src={getBookingImage(booking.artisanId)} alt={booking.artisanName} className="w-full h-full object-cover" />
+                            <img src={getBookingImage(booking.artisanImage)} alt={booking.artisanName} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-wrap items-start justify-between gap-2">
@@ -303,7 +302,7 @@ export default function CustomerDashboard({ user, logout }: CustomerDashboardPro
                       <div key={item.id} className="bg-white rounded-xl sm:rounded-[28px] p-4 sm:p-6 shadow-[0_18px_40px_rgba(43,30,26,0.08)]">
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                           <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden bg-[#E9E1D6] flex-shrink-0">
-                            <img src={getBookingImage(item.artisanId)} alt={item.artisanName} className="w-full h-full object-cover" />
+                            <img src={getBookingImage(item.artisanImage)} alt={item.artisanName} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-wrap items-start justify-between gap-2">

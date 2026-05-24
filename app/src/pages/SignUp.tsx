@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, ArrowLeft, Mail, Lock, User, Phone, MapPin, Briefcase, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { categories } from '@/data/mockData'
 import { useAuth } from '@/features/auth/AuthProvider'
+import { useArtisanCategories } from '@/features/artisans/hooks'
 
 export default function SignUp() {
   const navigate = useNavigate()
   const { signUp } = useAuth()
+  const { data: categories, isLoading: categoriesLoading, error: categoriesError } = useArtisanCategories()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [accountType, setAccountType] = useState<'customer' | 'artisan'>('customer')
@@ -108,6 +109,12 @@ export default function SignUp() {
             </div>
           )}
 
+          {accountType === 'artisan' && categoriesError && (
+            <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl bg-red-50 text-red-600 text-sm">
+              {categoriesError}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             {/* Common Fields */}
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
@@ -197,8 +204,9 @@ export default function SignUp() {
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         className="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border border-[#2B1E1A]/10 bg-white text-sm text-[#2B1E1A] focus:outline-none focus:ring-2 focus:ring-[#E4A14F]/50 transition-all appearance-none"
                         required
+                        disabled={categoriesLoading || categories.length === 0}
                       >
-                        <option value="">Select category</option>
+                        <option value="">{categoriesLoading ? 'Loading categories...' : 'Select category'}</option>
                         {categories.map((cat) => (
                           <option key={cat.id} value={cat.id}>{cat.name}</option>
                         ))}
@@ -315,10 +323,6 @@ export default function SignUp() {
               </Link>
             </p>
           </div>
-
-          <p className="mt-4 text-center text-xs text-[#6E5F57]">
-            Auth mode: {import.meta.env.VITE_AUTH_MODE === 'api' ? 'backend API' : 'demo'}
-          </p>
         </div>
       </div>
     </div>
