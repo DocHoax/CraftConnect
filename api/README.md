@@ -107,6 +107,40 @@ Health endpoint:
 - `npm run prisma:migrate`: run development migrations
 - `npm run prisma:seed`: ensure reference categories exist
 
+## Deployment
+
+The repository now includes a root-level Docker Compose deployment in `../docker-compose.yml`.
+
+The compose stack runs:
+
+- PostgreSQL
+- the API service
+- the frontend service
+
+Deployment flow:
+
+1. PostgreSQL starts inside the compose network.
+2. The API waits for the database health check.
+3. The API runs `prisma migrate deploy` and `npm run prisma:seed` on startup.
+4. The frontend is served by Nginx and talks to the API on `http://localhost:4000`.
+
+From the repository root:
+
+```bash
+docker compose up --build
+```
+
+Exposed services:
+
+- frontend: `http://localhost:8080`
+- API: `http://localhost:4000`
+
+Notes:
+
+- the compose PostgreSQL service is internal-only and is not published to a host port
+- this avoids conflicts with any PostgreSQL instance already running on your machine
+- if you deploy to a real HTTPS host, review cookie security settings and `CORS_ORIGIN`
+
 ## Frontend Integration
 
 The frontend must point to this API through `app/.env`:

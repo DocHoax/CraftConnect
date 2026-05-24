@@ -70,6 +70,24 @@ Frontend development server:
 - `npm run lint`: run ESLint
 - `npm run preview`: preview the production build
 
+## Deployment
+
+This frontend can be deployed together with the backend using the root-level Docker Compose setup in `../docker-compose.yml`.
+
+When deployed through Docker Compose:
+
+- the frontend is served by Nginx
+- the frontend is exposed on `http://localhost:8080`
+- the build uses `VITE_API_BASE_URL=http://localhost:4000`
+
+From the repository root:
+
+```bash
+docker compose up --build
+```
+
+See `../api/README.md` for the backend side of the deployment flow.
+
 ## Current Behavior
 
 - The frontend is API-only now. Demo/mock fallback mode has been removed.
