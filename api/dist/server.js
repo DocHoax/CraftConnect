@@ -16,6 +16,9 @@ const error_1 = require("./middleware/error");
 const app = (0, express_1.default)();
 const port = Number(process.env.PORT || 4000);
 const corsOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173').split(',').map((v) => v.trim());
+if (process.env.TRUST_PROXY === 'true') {
+    app.set('trust proxy', 1);
+}
 app.use((0, cors_1.default)({ origin: corsOrigins, credentials: true }));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
