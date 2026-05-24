@@ -3,7 +3,7 @@ import { getConfiguredAuthMode, getCurrentUser, loginRequest, logoutRequest, sig
 import type { LoginPayload, SignUpPayload, User } from '@/types/auth'
 
 interface AuthContextValue {
-  authMode: 'demo' | 'api'
+  authMode: 'api'
   user: User | null
   isLoading: boolean
   login: (payload: LoginPayload) => Promise<User>

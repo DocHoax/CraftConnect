@@ -5,6 +5,7 @@ export interface Booking {
   customerId: string
   artisanId: string
   artisanName: string
+  artisanImage?: string
   service: string
   date: string
   time: string
