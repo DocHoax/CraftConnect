@@ -1,0 +1,35 @@
+2026-03-30 23:30:48.002 WAT [14068] LOG:  starting PostgreSQL 18.3 on x86_64-windows, compiled by msvc-19.44.35223, 64-bit
+2026-03-30 23:30:48.019 WAT [14068] LOG:  listening on IPv6 address "::1", port 5433
+2026-03-30 23:30:48.019 WAT [14068] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-03-30 23:30:48.282 WAT [13912] LOG:  database system was shut down at 2026-03-30 23:30:36 WAT
+2026-03-30 23:30:48.346 WAT [14068] LOG:  database system is ready to accept connections
+2026-03-30 23:31:54.460 WAT [15504] ERROR:  relation "_prisma_migrations" does not exist at character 126
+2026-03-30 23:31:54.460 WAT [15504] STATEMENT:  SELECT "id", "checksum", "finished_at", "migration_name", "logs", "rolled_back_at", "started_at", "applied_steps_count" FROM "_prisma_migrations" ORDER BY "started_at" ASC
+2026-03-30 23:31:59.950 WAT [13596] LOG:  checkpoint starting: immediate force wait
+2026-03-30 23:32:06.151 WAT [13596] LOG:  checkpoint complete: wrote 984 buffers (6.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.198 s, sync=5.870 s, total=6.202 s; sync files=303, longest=0.216 s, average=0.020 s; distance=9311 kB, estimate=9311 kB; lsn=0/2104308, redo lsn=0/21042B0
+2026-03-30 23:32:10.901 WAT [13596] LOG:  checkpoint starting: immediate force wait
+2026-03-30 23:32:11.375 WAT [13596] LOG:  checkpoint complete: wrote 3 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.010 s, sync=0.111 s, total=0.474 s; sync files=4, longest=0.050 s, average=0.028 s; distance=4657 kB, estimate=8846 kB; lsn=0/2590860, redo lsn=0/2590808
+2026-03-30 23:37:10.391 WAT [13596] LOG:  checkpoint starting: time
+2026-03-30 23:37:25.701 WAT [13596] LOG:  checkpoint complete: wrote 130 buffers (0.8%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=14.213 s, sync=0.991 s, total=15.311 s; sync files=85, longest=0.069 s, average=0.012 s; distance=645 kB, estimate=8026 kB; lsn=0/2631D88, redo lsn=0/2631CF8
+2026-03-30 23:42:10.705 WAT [13596] LOG:  checkpoint starting: time
+2026-03-30 23:42:10.946 WAT [13596] LOG:  checkpoint complete: wrote 1 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.105 s, sync=0.039 s, total=0.242 s; sync files=1, longest=0.039 s, average=0.039 s; distance=0 kB, estimate=7223 kB; lsn=0/2632020, redo lsn=0/2631FB0
+2026-04-02 00:53:35.090 WAT [14068] LOG:  autovacuum launcher process (PID 12656) was terminated by exception 0x40010004
+2026-04-02 00:53:35.090 WAT [14068] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2026-04-02 00:53:35.471 WAT [14068] LOG:  terminating any other active server processes
+2026-04-02 00:53:39.839 WAT [14068] LOG:  all server processes terminated; reinitializing
+2026-05-24 12:30:00.139 WAT [14400] LOG:  starting PostgreSQL 18.3 on x86_64-windows, compiled by msvc-19.44.35223, 64-bit
+2026-05-24 12:30:00.154 WAT [14400] LOG:  listening on IPv6 address "::1", port 5433
+2026-05-24 12:30:00.154 WAT [14400] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2026-05-24 12:30:01.020 WAT [2324] LOG:  database system was interrupted; last known up at 2026-04-03 20:47:04 WAT
+2026-05-24 12:30:11.111 WAT [2324] LOG:  syncing data directory (fsync), elapsed time: 10.08 s, current path: ./base/16384/3604
+2026-05-24 12:30:13.407 WAT [2324] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-05-24 12:30:13.682 WAT [2324] LOG:  redo starts at 0/263BB98
+2026-05-24 12:30:13.682 WAT [2324] LOG:  invalid record length at 0/263BCA0: expected at least 24, got 0
+2026-05-24 12:30:13.686 WAT [2324] LOG:  redo done at 0/263BC68 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.10 s
+2026-05-24 12:30:13.857 WAT [3560] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-05-24 12:30:14.664 WAT [3560] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.163 s, total=0.858 s; sync files=2, longest=0.091 s, average=0.082 s; distance=0 kB, estimate=0 kB; lsn=0/263BCA0, redo lsn=0/263BCA0
+2026-05-24 12:30:15.019 WAT [14400] LOG:  database system is ready to accept connections
+2026-05-24 13:07:37.717 WAT [14400] LOG:  background worker "logical replication launcher" (PID 12304) was terminated by exception 0xC000013A
+2026-05-24 13:07:37.717 WAT [14400] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2026-05-24 13:07:37.717 WAT [14400] LOG:  terminating any other active server processes
+^C
