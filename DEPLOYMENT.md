@@ -101,6 +101,8 @@ npm run build
 
 The repository already includes [app/vercel.json](c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json) so SPA routes rewrite to `index.html`.
 
+If you still get `vite: command not found`, switch the Framework Preset to `Other`, keep the Root Directory as `app`, and set the Build Command to `npm run build`. That forces Vercel to use the local app install instead of a preset-specific build path.
+
 Set this environment variable on Vercel:
 
 ```env
