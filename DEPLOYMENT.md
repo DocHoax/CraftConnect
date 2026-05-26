@@ -33,6 +33,8 @@ The backend expects a `craftconnect` schema layout managed by Prisma migrations.
 
 Create a new Web Service on Render connected to this repository.
 
+If you use the included Render Blueprint, most environment variables are already prefilled. In the Render dashboard form, you only need to supply the values marked as secret or environment-specific.
+
 Recommended settings:
 
 - Root Directory: `api`
@@ -53,6 +55,15 @@ SESSION_COOKIE_SECURE=true
 SESSION_COOKIE_SAME_SITE=none
 TRUST_PROXY=true
 ```
+
+If you deploy from the Render form instead of the Blueprint, enter the same values there. For the Environment Variables page shown in the screenshot, add:
+
+```env
+DATABASE_URL=<your-neon-direct-connection-string>
+CORS_ORIGIN=http://localhost:5173
+```
+
+Then replace `CORS_ORIGIN` with your final Vercel URL after the frontend is live.
 
 Notes:
 
