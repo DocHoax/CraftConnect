@@ -76,7 +76,9 @@ The recommended hosted deployment for this project is:
 
 - frontend on Vercel
 - backend on Render
-- database on Neon Postgres
+- database on Render Postgres
+
+The Render Blueprint now provisions the database automatically.
 
 For the full step-by-step process, see [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md).
 
