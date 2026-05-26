@@ -47,7 +47,6 @@ You can also use the included [render.yaml](c:/Users/Syntra/Downloads/CraftConne
 Set these environment variables on Render:
 
 ```env
-PORT=4000
 DATABASE_URL=<your-neon-direct-connection-string>
 CORS_ORIGIN=http://localhost:5173
 SESSION_COOKIE_NAME=cc_session
@@ -55,6 +54,8 @@ SESSION_COOKIE_SECURE=true
 SESSION_COOKIE_SAME_SITE=none
 TRUST_PROXY=true
 ```
+
+Do not set `PORT` manually on Render. Render provides the port for the web service.
 
 If you deploy from the Render form instead of the Blueprint, enter the same values there. For the Environment Variables page shown in the screenshot, add:
 
