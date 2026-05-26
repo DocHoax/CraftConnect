@@ -4,30 +4,31 @@ This project is prepared for the following deployment split:
 
 - frontend: Vercel
 - backend: Render
-- database: Neon Postgres
+- database: Render Postgres
+
+The included [render.yaml](c:/Users/Syntra/Downloads/CraftConnect/render.yaml) now provisions both the backend and the database together.
 
 ## Deployment Order
 
 Use this order:
 
-1. Create the Neon PostgreSQL database.
-2. Deploy the backend to Render.
-3. Deploy the frontend to Vercel.
-4. Update backend CORS to the final Vercel URL.
+1. Deploy the Render Blueprint.
+2. Deploy the frontend to Vercel.
+3. Update backend CORS to the final Vercel URL.
 
 This order avoids guessing production URLs too early.
 
-## 1. Neon Postgres
+## 1. Render Blueprint
 
-Create a Neon project and database, then copy the database connection string.
+Create a new Render Blueprint from this repository.
+
+The blueprint provisions the Render Postgres database automatically and connects it to the backend service.
 
 Important:
 
-- use the direct PostgreSQL connection string from Neon
-- include SSL as provided by Neon
-- use that value for `DATABASE_URL` on Render
-
-The backend expects a `craftconnect` schema layout managed by Prisma migrations.
+- use the database created by the blueprint
+- the API service receives `DATABASE_URL` from that database automatically
+- the backend expects a `craftconnect` schema layout managed by Prisma migrations
 
 ## 2. Render Backend
 
@@ -47,7 +48,6 @@ You can also use the included [render.yaml](c:/Users/Syntra/Downloads/CraftConne
 Set these environment variables on Render:
 
 ```env
-DATABASE_URL=<your-neon-direct-connection-string>
 CORS_ORIGIN=http://localhost:5173
 SESSION_COOKIE_NAME=cc_session
 SESSION_COOKIE_SECURE=true
@@ -57,12 +57,13 @@ TRUST_PROXY=true
 
 Do not set `PORT` manually on Render. Render provides the port for the web service.
 
-If you deploy from the Render form instead of the Blueprint, enter the same values there. For the Environment Variables page shown in the screenshot, add:
+If you deploy from the Render form instead of the Blueprint, add the same values there. For the Environment Variables page shown in the screenshot, add:
 
 ```env
-DATABASE_URL=<your-neon-direct-connection-string>
 CORS_ORIGIN=http://localhost:5173
 ```
+
+If you skip the Blueprint entirely, create a separate Render Postgres database first and set `DATABASE_URL` to that database's connection string manually.
 
 Then replace `CORS_ORIGIN` with your final Vercel URL after the frontend is live.
 
@@ -138,7 +139,7 @@ After both services are live:
 2. Load artisan categories.
 3. Register a real account.
 4. Confirm that requests reach the Render API.
-5. Check Neon to confirm rows are created.
+5. Check Render Postgres to confirm rows are created.
 
 ## Environment Summary
 
@@ -151,8 +152,7 @@ VITE_API_BASE_URL=https://your-render-service.onrender.com
 ### Render
 
 ```env
-PORT=4000
-DATABASE_URL=<your-neon-direct-connection-string>
+DATABASE_URL=<your-render-postgres-connection-string>
 CORS_ORIGIN=https://your-vercel-domain.vercel.app
 SESSION_COOKIE_NAME=cc_session
 SESSION_COOKIE_SECURE=true
@@ -164,5 +164,5 @@ TRUST_PROXY=true
 
 - The frontend no longer contains demo/mock fallback mode.
 - The backend seed now ensures reference categories only.
-- If Neon has no users or artisans yet, the frontend will show empty live states until real data is created.
+- If Render Postgres has no users or artisans yet, the frontend will show empty live states until real data is created.
 - If authentication cookies do not persist, recheck `CORS_ORIGIN`, `SESSION_COOKIE_SECURE`, and `SESSION_COOKIE_SAME_SITE` first.

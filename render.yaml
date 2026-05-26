@@ -1,3 +1,6 @@
+databases:
+  - name: craftconnect-db
+
 services:
   - type: web
     name: craftconnect-api
@@ -18,6 +21,8 @@ services:
       - key: TRUST_PROXY
         value: true
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: craftconnect-db
+          property: connectionString
       - key: CORS_ORIGIN
         sync: false

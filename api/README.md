@@ -112,21 +112,23 @@ Health endpoint:
 The recommended hosted deployment for this backend is:
 
 - API on Render
-- PostgreSQL on Neon
+- PostgreSQL on Render
 
-The repository includes [c:/Users/Syntra/Downloads/CraftConnect/render.yaml](c:/Users/Syntra/Downloads/CraftConnect/render.yaml) to support that setup.
+The repository includes [c:/Users/Syntra/Downloads/CraftConnect/render.yaml](c:/Users/Syntra/Downloads/CraftConnect/render.yaml) to support that setup and create the database automatically.
 
 Required production environment variables:
 
 ```env
-PORT=4000
-DATABASE_URL=<your-neon-direct-connection-string>
 CORS_ORIGIN=https://your-vercel-domain.vercel.app
 SESSION_COOKIE_NAME=cc_session
 SESSION_COOKIE_SECURE=true
 SESSION_COOKIE_SAME_SITE=none
 TRUST_PROXY=true
 ```
+
+When you deploy from the Render Blueprint, `DATABASE_URL` is injected from the Render Postgres database automatically.
+
+If you deploy the API without the Blueprint, create a separate Render Postgres database first and set `DATABASE_URL` to that connection string manually.
 
 For the full deployment sequence, see [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md).
 
