@@ -93,13 +93,21 @@ Recommended settings:
 - Framework Preset: `Vite`
 - Root Directory: `app`
 
+If Vercel asks for a build command, use the package default from `app/package.json`:
+
+```bash
+npm run build
+```
+
+The repository already includes [app/vercel.json](c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json) so SPA routes rewrite to `index.html`.
+
 Set this environment variable on Vercel:
 
 ```env
 VITE_API_BASE_URL=https://your-render-service.onrender.com
 ```
 
-The repository already includes [app/vercel.json](c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json) so client-side routes resolve correctly for the SPA.
+If you are using the Vercel dashboard's Environment Variables form, paste `VITE_API_BASE_URL` there exactly once. Do not use the backend Render variables on Vercel.
 
 Deploy the project, then copy the final Vercel domain. Example:
 
