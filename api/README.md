@@ -107,31 +107,6 @@ Health endpoint:
 - `npm run prisma:migrate`: run development migrations
 - `npm run prisma:seed`: ensure reference categories exist
 
-## Deployment
-
-The recommended hosted deployment for this backend is:
-
-- API on Render
-- PostgreSQL on Render
-
-The repository includes [c:/Users/Syntra/Downloads/CraftConnect/render.yaml](c:/Users/Syntra/Downloads/CraftConnect/render.yaml) to support that setup and create the database automatically.
-
-Required production environment variables:
-
-```env
-CORS_ORIGIN=https://your-vercel-domain.vercel.app
-SESSION_COOKIE_NAME=cc_session
-SESSION_COOKIE_SECURE=true
-SESSION_COOKIE_SAME_SITE=none
-TRUST_PROXY=true
-```
-
-When you deploy from the Render Blueprint, `DATABASE_URL` is injected from the Render Postgres database automatically.
-
-If you deploy the API without the Blueprint, create a separate Render Postgres database first and set `DATABASE_URL` to that connection string manually.
-
-For the full deployment sequence, see [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md).
-
 ## Frontend Integration
 
 The frontend must point to this API through `app/.env`:
@@ -149,4 +124,3 @@ VITE_API_BASE_URL="http://localhost:4000"
 ## Related Docs
 
 - Frontend application README: `../app/README.md`
-- Hosted deployment guide: [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md)

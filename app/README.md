@@ -70,26 +70,6 @@ Frontend development server:
 - `npm run lint`: run ESLint
 - `npm run preview`: preview the production build
 
-## Deployment
-
-The recommended hosted deployment for this project is:
-
-- frontend on Vercel
-- backend on Render
-- database on Render Postgres
-
-The Render Blueprint now provisions the database automatically.
-
-For the full step-by-step process, see [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md).
-
-Frontend-specific Vercel settings:
-
-- Framework Preset: `Vite`
-- Root Directory: `app`
-- Environment Variable: `VITE_API_BASE_URL=https://your-render-service.onrender.com`
-
-This app already includes [c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json](c:/Users/Syntra/Downloads/CraftConnect/app/vercel.json) for SPA route rewrites.
-
 ## Current Behavior
 
 - The frontend is API-only now. Demo/mock fallback mode has been removed.
@@ -99,4 +79,3 @@ This app already includes [c:/Users/Syntra/Downloads/CraftConnect/app/vercel.jso
 ## Related Docs
 
 - Backend setup and API details: `../api/README.md`
-- Hosted deployment guide: [c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md](c:/Users/Syntra/Downloads/CraftConnect/DEPLOYMENT.md)
